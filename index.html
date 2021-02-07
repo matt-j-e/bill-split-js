@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<script src="js/bill.js"></script>
+<script src="js/item.js"></script>
+<script src="js/person.js"></script>
+<script>
+  const jane = new Person("Jane");
+  const colin = new Person("Colin");
+  const terry = new Person("Terry");
+  const matt = new Person("Matt");
+  const kirstie = new Person("Kirstie");
+  const bill = new Bill(15950);
+  const items = [];
+  items[0] = new Item(1600, [{person: colin, proportion: 3}, {person: terry, proportion: 1}]);
+  items[1] = new Item(600, [{person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
+  items[2] = new Item(750, [{person: jane, proportion: 1}]);
+  items[3] = new Item(750, [{person: kirstie, proportion: 1}]);
+  items[4] = new Item(1500, [{person: jane, proportion: 1}, {person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
+  items[5] = new Item(1100, [{person: colin, proportion: 1}, {person: terry, proportion: 1}]);
+  items[6] = new Item(1900, [{person: jane, proportion: 1}, {person: terry, proportion: 1}]);
+  items[7] = new Item(1700, [{person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
+  items[8] = new Item(800, [{person: colin, proportion: 1}]);
+  items[9] = new Item(1350, [{person: terry, proportion: 1}, {person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
+  items[10] = new Item(1500, [{person: jane, proportion: 1}, {person: colin, proportion: 1}, {person: terry, proportion: 1}]);
+  items[11] = new Item(600, [{person: kirstie, proportion: 1}]);
+  items[12] = new Item(1800, [{person: kirstie, proportion: 1}, {person: matt, proportion: 2}]);
+  
+  items.forEach(item => bill.addItem(item));
+  bill.calculateSplit();
+  bill.split.forEach((person) => {
+    const total = person.itemsPrices.reduce((acc, item) => {
+      return acc + item;
+    }, 0);
+    console.log(person.name, total);
+  });
+</script>
+</body>
+</html>

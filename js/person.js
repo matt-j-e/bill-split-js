@@ -1,9 +1,11 @@
-const { MODULESPECIFIER_TYPES } = require("@babel/types");
-
 class Person {
     constructor(name) {
         this.name = name;
     }
 }
 
-module.exports = Person;
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = Person;
+} else {
+    window.Port = Person;
+}

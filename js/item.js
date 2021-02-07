@@ -1,7 +1,7 @@
 class Item {
-    constructor(amount, people) {
+    constructor(amount, sharedBetween) {
         this.amount = amount;
-        this.people = people; // an array of objects made up of {person: person. proportion:n}
+        this.sharedBetween = sharedBetween; // an array of objects made up of {person: person. proportion:n}
         this.tipSupplement = 0;
     }
 
@@ -10,4 +10,8 @@ class Item {
     }
 }
 
-module.exports = Item;
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = Item;
+} else {
+    window.Port = Item;
+}

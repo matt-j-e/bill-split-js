@@ -1,0 +1,7 @@
+#addBill, #addItem, #sharedBetween > div > select {
+    display: none;
+}
+
+#totalAmountToSplit {
+    display: none;
+}

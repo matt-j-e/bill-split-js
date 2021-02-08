@@ -3,43 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <!-- <link rel="stylesheet" href="css/normalize.css"> -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>SplitIt</title>
 </head>
 <body>
+<h1>Split it</h1>
+<main id="container">
+  <section id="viewport">
+    <ul id="namesList">
+      <li>Add the names of the people in your party</li>
+    </ul>
+    <p id="totalAmountToSplit">Total amount to be split: £<span></span></p>
 
+    <article id="addName">
+      <label for="name" class="sr-text">Add a name</label>
+      <input type="text" id="name" placeholder="Add name">
+      <button id="nameSubmit">Add name</button>
+      <p>When you have added all the names you need click continue</p>
+    </article>
+
+    <button id="splitBillButton">Continue</button>
+
+    <article id="addBill">
+      <h2>Add the bill total</h2>
+      <label for="billTotal" class="sr-text">Bill total amount</label>
+      <input type="text" id="billTotal" placeholder="Bill total amount">
+      <!-- <input type="submit" id="billSubmit" value="Save bill amount"> -->
+      <button id="billSubmit">Save bill amount</button>
+    </article>
+
+    <article id="addItem">
+      <h2>Add an item</h2>
+      <label for="itemAmount" class="sr-text">Item amount</label>
+      <input type="text" id="itemAmount" placeholder="Item amount">
+      <div id="sharedBetween">
+        <p>Select the people who shared this item</p>
+        <p>And choose their portion</p>
+        <p><small>If shared equally leave portion set to 1</small></p>
+      </div>
+      <button id="itemSubmit">Add item</button>
+    </article>
+
+  </section>
+</main>
 <script src="js/bill.js"></script>
 <script src="js/item.js"></script>
 <script src="js/person.js"></script>
+<script src="js/controller.js"></script>
+<script>const controller = new Controller()</script>
 <script>
-  const jane = new Person("Jane");
-  const colin = new Person("Colin");
-  const terry = new Person("Terry");
-  const matt = new Person("Matt");
-  const kirstie = new Person("Kirstie");
-  const bill = new Bill(15950);
-  const items = [];
-  items[0] = new Item(1600, [{person: colin, proportion: 3}, {person: terry, proportion: 1}]);
-  items[1] = new Item(600, [{person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
-  items[2] = new Item(750, [{person: jane, proportion: 1}]);
-  items[3] = new Item(750, [{person: kirstie, proportion: 1}]);
-  items[4] = new Item(1500, [{person: jane, proportion: 1}, {person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
-  items[5] = new Item(1100, [{person: colin, proportion: 1}, {person: terry, proportion: 1}]);
-  items[6] = new Item(1900, [{person: jane, proportion: 1}, {person: terry, proportion: 1}]);
-  items[7] = new Item(1700, [{person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
-  items[8] = new Item(800, [{person: colin, proportion: 1}]);
-  items[9] = new Item(1350, [{person: terry, proportion: 1}, {person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
-  items[10] = new Item(1500, [{person: jane, proportion: 1}, {person: colin, proportion: 1}, {person: terry, proportion: 1}]);
-  items[11] = new Item(600, [{person: kirstie, proportion: 1}]);
-  items[12] = new Item(1800, [{person: kirstie, proportion: 1}, {person: matt, proportion: 2}]);
+  // const jane = new Person("Jane");
+  // const colin = new Person("Colin");
+  // const terry = new Person("Terry");
+  // const matt = new Person("Matt");
+  // const kirstie = new Person("Kirstie");
+  // const bill = new Bill(15950);
+  // const items = [];
+  // items[0] = new Item(1600, [{person: colin, proportion: 3}, {person: terry, proportion: 1}]);
+  // items[1] = new Item(600, [{person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
+  // items[2] = new Item(750, [{person: jane, proportion: 1}]);
+  // items[3] = new Item(750, [{person: kirstie, proportion: 1}]);
+  // items[4] = new Item(1500, [{person: jane, proportion: 1}, {person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
+  // items[5] = new Item(1100, [{person: colin, proportion: 1}, {person: terry, proportion: 1}]);
+  // items[6] = new Item(1900, [{person: jane, proportion: 1}, {person: terry, proportion: 1}]);
+  // items[7] = new Item(1700, [{person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
+  // items[8] = new Item(800, [{person: colin, proportion: 1}]);
+  // items[9] = new Item(1350, [{person: terry, proportion: 1}, {person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
+  // items[10] = new Item(1500, [{person: jane, proportion: 1}, {person: colin, proportion: 1}, {person: terry, proportion: 1}]);
+  // items[11] = new Item(600, [{person: kirstie, proportion: 1}]);
+  // items[12] = new Item(1800, [{person: kirstie, proportion: 1}, {person: matt, proportion: 2}]);
   
-  items.forEach(item => bill.addItem(item));
-  bill.calculateSplit();
-  bill.split.forEach((person) => {
-    const total = person.itemsPrices.reduce((acc, item) => {
-      return acc + item;
-    }, 0);
-    console.log(person.name, total);
-  });
+  // items.forEach(item => bill.addItem(item));
+  // bill.calculateSplit();
+  // bill.split.forEach((person) => {
+  //   const total = person.itemsPrices.reduce((acc, item) => {
+  //     return acc + item;
+  //   }, 0);
+  //   console.log(person.name, total);
+  // });
 </script>
 </body>
 </html>

@@ -29,7 +29,6 @@ class Bill {
             });
             this.split.push(obj);
         });
-        // console.log(this.split);
     }
 
     get peopleArray() {

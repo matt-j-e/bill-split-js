@@ -1,4 +1,8 @@
-#addBill, #addItem, #sharedBetween > div > select {
+#addBill,
+#addItem,
+#sharedBetween > div > select,
+#totalItemsSoFar,
+#addTip {
     display: none;
 }
 

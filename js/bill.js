@@ -11,11 +11,18 @@ class Bill {
         // if (this.totalReached()) console.log("Total reached");
     }
 
-    get totalReached() {
+    get currentTotal() {
         const currentTotal = this.items.reduce((acc, item) => {
             return acc + item.amount;
         }, 0);
-        return currentTotal === this.amount; // will return true if items add up to Bill amount
+        return currentTotal;
+    }
+
+    get totalReached() {
+        // const currentTotal = this.items.reduce((acc, item) => {
+        //     return acc + item.amount;
+        // }, 0);
+        return this.currentTotal === this.amount; // will return true if items add up to Bill amount
     }
 
     calculateSplit() {

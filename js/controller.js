@@ -7,8 +7,8 @@ class Controller {
         document.querySelector("#nameSubmit").addEventListener("click", () => this.addName());
         document.querySelector("#splitBillButton").addEventListener("click", () => this.progressToBill());
         document.querySelector("#billSubmit").addEventListener("click", () => this.addBillAmount());
-        document.querySelector("#itemSubmit").addEventListener("click", () => this.addItemAmount());
-        
+        document.querySelector("#itemSubmit").addEventListener("click", () => this.addItem());
+        document.querySelector("#tipSubmit").addEventListener("click", () => this.addTip());
     }
 
     addName() {
@@ -47,7 +47,7 @@ class Controller {
 
     addBillAmount() {
         const billTotalInput = document.querySelector("#billTotal");
-        const billTotal = billTotalInput.value;
+        const billTotal = parseInt(billTotalInput.value);
         this.bill = new Bill(billTotal);
         // console.log(this.bill);
         document.querySelector("#totalAmountToSplit > span").innerText = this.bill.amount / 100;
@@ -99,11 +99,22 @@ class Controller {
         selectElement.style.display = selectElement.style.display === "none" ? "inline" : "none";
     }
 
-    addItemAmount() {
+    addItem() {
+        document.querySelector("#totalItemsSoFar").style.display = "block";
         const itemAmountInput = document.querySelector("#itemAmount");
-        const itemAmount = itemAmountInput.value;
+        const itemAmount = parseInt(itemAmountInput.value);
         const item = new Item(itemAmount, this.sharedBetweenArray);
         this.bill.addItem(item);
+        this.updateTotalItemsSoFar();
+        if (this.bill.totalReached) {
+            document.querySelector("#addItem").style.display = "none";
+            this.bill.calculateSplit();
+            console.log(this.bill.split);
+            this.renderFinalSplit();
+            this.renderAddTip();
+        } else {
+            this.clearAddItemFields();
+        }
     }
 
     get sharedBetweenArray() {
@@ -116,12 +127,67 @@ class Controller {
             // console.log(div.lastChild.style.display);
             if (div.lastChild.style.display === "inline") {
                 personObj = this.people.find(person => person.name === div.id);
-                obj = {person: personObj, proportion: div.lastChild.value};
+                obj = {person: personObj, proportion: parseInt(div.lastChild.value)};
                 sharedBetween.push(obj);
             }
         });
         return sharedBetween;
     }
 
+    updateTotalItemsSoFar() {
+        const itemsSoFarElement = document.querySelector("#totalItemsSoFar > span");
+        // const totalSoFar = this.bill.items.reduce((acc, item) => {
+        //     return acc + item.amount;
+        // }, 0);
+        // itemsSoFarElement.innerText = totalSoFar / 100;
+        itemsSoFarElement.innerText = this.bill.currentTotal / 100;
+        // return totalSoFar;
+    }
+
+    clearAddItemFields() {
+        const itemAmountInput = document.querySelector("#itemAmount");
+        itemAmountInput.value = "";
+        const shared = document.querySelector("#sharedBetween");
+        const sharers = shared.querySelectorAll("div");
+        sharers.forEach(sharer => shared.removeChild(sharer));
+        this.renderItemSharingInputs();
+        itemAmountInput.focus();
+    }
+
+    renderFinalSplit() {
+        const finalSplitElement = document.querySelector("#finalSplit ul");
+        this.bill.split.forEach((person) => {
+            const li = document.createElement("li");
+            li.innerHTML = `${person.name}: <b>£${this.splitTotaliser(person.itemsPrices)/100}</b>`;
+            finalSplitElement.appendChild(li);
+        });
+    }
+
+    splitTotaliser(itemsPrices) {
+        // a helper function to add an individual's share of each item and round accordingly
+        const tot = itemsPrices.reduce((acc, itemPrice) => {
+            return acc + itemPrice;
+        }, 0);
+        return Math.round(tot);
+    }
+
+    renderAddTip() {
+        const billAmount = parseInt(this.bill.amount);
+        document.querySelector("#addTip").style.display = "block";
+        const fiveUpElement = document.querySelector("#fiveUp");
+        const tenUpElement = document.querySelector("#tenUp");
+        const fiveUpGrandElement = document.querySelector("#fiveUpGrand");
+        const tenUpGrandElement = document.querySelector("#tenUpGrand");
+        const fiveUp = Math.ceil((billAmount * 1.05)/100)*100 - billAmount;
+        const tenUp = Math.ceil((billAmount * 1.10)/100)*100 - billAmount;
+        fiveUpElement.innerText = fiveUp / 100;
+        tenUpElement.innerText = tenUp / 100;
+        fiveUpGrandElement.innerText = (billAmount + fiveUp) / 100;
+        tenUpGrandElement.innerText = (billAmount + tenUp) / 100;
+    }
+
+    addTip() {
+
+    }
 
 }

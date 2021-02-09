@@ -15,6 +15,7 @@
       <li>Add the names of the people in your party</li>
     </ul>
     <p id="totalAmountToSplit">Total amount to be split: £<span></span></p>
+    <p id="totalItemsSoFar">Total items added so far: £<span></span></p>
 
     <article id="addName">
       <label for="name" class="sr-text">Add a name</label>
@@ -29,7 +30,6 @@
       <h2>Add the bill total</h2>
       <label for="billTotal" class="sr-text">Bill total amount</label>
       <input type="text" id="billTotal" placeholder="Bill total amount">
-      <!-- <input type="submit" id="billSubmit" value="Save bill amount"> -->
       <button id="billSubmit">Save bill amount</button>
     </article>
 
@@ -43,6 +43,21 @@
         <p><small>If shared equally leave portion set to 1</small></p>
       </div>
       <button id="itemSubmit">Add item</button>
+    </article>
+
+    <article id="finalSplit">
+      <ul>  
+      </ul>
+    </article>
+
+    <article id="addTip">
+      <h2>Add a tip</h2>
+      <h3>Suggestions</h3>
+      <p>5% rounded up would be a tip of £<span id="fiveUp"></span>, giving grand total of: £<span id="fiveUpGrand" class="grand"></span></p>
+      <p>10% rounded up would be a tip of £<span  id="tenUp"></span>, giving grand total of: £<span id="tenUpGrand" class="grand"></span></p>
+      <label for="tipAmount" class="sr-text">Tip amount</label>
+      <input type="text" id="tipAmount" placeholder="Tip amount">
+      <button id="tipSubmit">Add tip</button>
     </article>
 
   </section>

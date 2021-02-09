@@ -108,13 +108,17 @@ class Controller {
 
     get sharedBetweenArray() {
         const sharedBetween = [];
+        let personObj, obj;
         const divs = document.querySelectorAll("#sharedBetween > div");
         divs.forEach((div) => {
             // console.log(div.id);
             // console.log(div.lastChild.value);
-            let personObj = this.people.find(person => person.name === div.id);
-            let obj = {person: personObj, proportion: div.lastChild.value};
-            sharedBetween.push(obj);
+            // console.log(div.lastChild.style.display);
+            if (div.lastChild.style.display === "inline") {
+                personObj = this.people.find(person => person.name === div.id);
+                obj = {person: personObj, proportion: div.lastChild.value};
+                sharedBetween.push(obj);
+            }
         });
         return sharedBetween;
     }

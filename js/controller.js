@@ -42,6 +42,7 @@ class Controller {
         // hide or display page sections as required
         document.querySelector("#addName").style.display = "none";
         document.querySelector("#splitBillButton").style.display = "none";
+        document.querySelector("#namesList").style.display = "none";
         document.querySelector("#addBill").style.display = "block";
     }
 
@@ -110,7 +111,7 @@ class Controller {
             document.querySelector("#addItem").style.display = "none";
             this.bill.calculateSplit();
             console.log(this.bill.split);
-            this.renderFinalSplit();
+            // this.renderFinalSplit();
             this.renderAddTip();
         } else {
             this.clearAddItemFields();
@@ -155,16 +156,33 @@ class Controller {
     }
 
     renderFinalSplit() {
+        const billAmount = parseInt(this.bill.amount);
+        const tipAmount = this.bill.tip;
         const finalSplitElement = document.querySelector("#finalSplit ul");
         this.bill.split.forEach((person) => {
             const li = document.createElement("li");
-            li.innerHTML = `${person.name}: <b>£${this.splitTotaliser(person.itemsPrices)/100}</b>`;
+            const billShare = this.splitTotaliser(person.itemsPrices);
+            let tipShare = 0;
+            if (tipAmount > 0) {
+                tipShare = Math.round(this.bill.tip * (billShare / billAmount));
+            }
+            const totalShare = billShare + tipShare;
+            li.innerHTML = `${person.name}: <b>£${billShare / 100}</b>`;
+            if (tipShare > 0) {
+                li.innerHTML += ` plus £${tipShare / 100} = £${totalShare / 100}`;
+            }
             finalSplitElement.appendChild(li);
         });
+        const totalLi = document.createElement("li");
+        totalLi.innerHTML = `Total: <b>£${billAmount / 100}</b>`;
+        if (tipAmount > 0) {
+            totalLi.innerHTML += ` plus £${tipAmount / 100} = £${(billAmount + tipAmount) / 100}`;
+        }
     }
 
     splitTotaliser(itemsPrices) {
         // a helper function to add an individual's share of each item and round accordingly
+        // takes in the itemsPrices array from this.bill.split
         const tot = itemsPrices.reduce((acc, itemPrice) => {
             return acc + itemPrice;
         }, 0);
@@ -187,7 +205,10 @@ class Controller {
     }
 
     addTip() {
-
+        const billAmount = parseInt(this.bill.amount);
+        const tipAmountInput = document.querySelector("#tipAmount");
+        this.bill.tip = parseInt(tipAmountInput.value);
+        this.renderFinalSplit();
     }
 
 }

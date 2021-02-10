@@ -2,10 +2,48 @@
 #addItem,
 #sharedBetween > div > select,
 #totalItemsSoFar,
-#addTip {
+#addTip,
+#allItemsAllocated,
+#totalAmountToSplit,
+#finalSplit {
     display: none;
 }
 
-#totalAmountToSplit {
-    display: none;
+body {
+    background: url('../bg.jpg') top center;
+    background-size: cover;
+    min-height: 100vh;
+    max-width: 650px;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0 auto;
 }
+
+h1 {
+    background-color: rgba(255,255,255,0.8);
+    color: #ac6c49;
+    text-transform: uppercase;
+}
+
+main {
+    background-color: rgba(0,0,0,0.7);
+    min-height: 60vh;
+    padding: 1rem;
+}
+
+#namesList {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+input#name, input#billTotal, input#itemAmount {
+    display: block;
+    margin: 1rem auto;
+    
+}
+
+
+/* <span>Photo by <a href="https://unsplash.com/@realbench?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Carlos Lindner</a> on <a href="https://unsplash.com/s/photos/restaurant-table?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span> */

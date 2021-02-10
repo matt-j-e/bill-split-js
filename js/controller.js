@@ -16,7 +16,6 @@ class Controller {
         const name = nameInput.value;
         const person = { name: name };
         this.people.push(person);
-        // console.log(this.people);
         nameInput.value = "";
         this.renderNamesList();
     }
@@ -50,7 +49,6 @@ class Controller {
         const billTotalInput = document.querySelector("#billTotal");
         const billTotal = parseInt(billTotalInput.value);
         this.bill = new Bill(billTotal);
-        // console.log(this.bill);
         document.querySelector("#totalAmountToSplit > span").innerText = this.bill.amount / 100;
         document.querySelector("#addBill").style.display = "none";
         document.querySelector("#totalAmountToSplit").style.display = "block";
@@ -109,9 +107,11 @@ class Controller {
         this.updateTotalItemsSoFar();
         if (this.bill.totalReached) {
             document.querySelector("#addItem").style.display = "none";
+            document.querySelector("#totalAmountToSplit").style.display = "none";
+            document.querySelector("#totalItemsSoFar").style.display = "none";
+            document.querySelector("#allItemsAllocated").style.display = "block";
             this.bill.calculateSplit();
             console.log(this.bill.split);
-            // this.renderFinalSplit();
             this.renderAddTip();
         } else {
             this.clearAddItemFields();
@@ -123,9 +123,6 @@ class Controller {
         let personObj, obj;
         const divs = document.querySelectorAll("#sharedBetween > div");
         divs.forEach((div) => {
-            // console.log(div.id);
-            // console.log(div.lastChild.value);
-            // console.log(div.lastChild.style.display);
             if (div.lastChild.style.display === "inline") {
                 personObj = this.people.find(person => person.name === div.id);
                 obj = {person: personObj, proportion: parseInt(div.lastChild.value)};
@@ -137,12 +134,7 @@ class Controller {
 
     updateTotalItemsSoFar() {
         const itemsSoFarElement = document.querySelector("#totalItemsSoFar > span");
-        // const totalSoFar = this.bill.items.reduce((acc, item) => {
-        //     return acc + item.amount;
-        // }, 0);
-        // itemsSoFarElement.innerText = totalSoFar / 100;
         itemsSoFarElement.innerText = this.bill.currentTotal / 100;
-        // return totalSoFar;
     }
 
     clearAddItemFields() {
@@ -156,6 +148,9 @@ class Controller {
     }
 
     renderFinalSplit() {
+        document.querySelector("#allItemsAllocated").style.display = "none";
+        document.querySelector("#finalSplit").style.display = "block";
+        document.querySelector("#addTip").style.display = "none";
         const billAmount = parseInt(this.bill.amount);
         const tipAmount = this.bill.tip;
         const finalSplitElement = document.querySelector("#finalSplit ul");

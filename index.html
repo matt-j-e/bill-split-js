@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="css/normalize.css"> -->
+    <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <title>SplitIt</title>
 </head>
@@ -18,7 +18,7 @@
     <p id="totalItemsSoFar">Total items added so far: £<span></span></p>
 
     <article id="addName">
-      <label for="name" class="sr-text">Add a name</label>
+      <!-- <label for="name" class="sr-text">Add a name</label> -->
       <input type="text" id="name" placeholder="Add name">
       <button id="nameSubmit">Add name</button>
       <p>When you have added all the names you need click continue</p>
@@ -28,7 +28,7 @@
 
     <article id="addBill">
       <h2>Add the bill total</h2>
-      <label for="billTotal" class="sr-text">Bill total amount</label>
+      <!-- <label for="billTotal" class="sr-text">Bill total amount</label> -->
       <input type="text" id="billTotal" placeholder="Bill total amount">
       <button id="billSubmit">Save bill amount</button>
     </article>
@@ -45,13 +45,16 @@
       <button id="itemSubmit">Add item</button>
     </article>
 
+    <p id="allItemsAllocated">All of the bill items are allocated.</p>
+
     <article id="finalSplit">
+      <p>The bill splits as follows:</p>
       <ul>  
       </ul>
     </article>
 
     <article id="addTip">
-      <h2>Add a tip</h2>
+      <h2>Add a tip?</h2>
       <h3>Suggestions</h3>
       <p>5% rounded up would be a tip of £<span id="fiveUp"></span>, giving grand total of: £<span id="fiveUpGrand" class="grand"></span></p>
       <p>10% rounded up would be a tip of £<span  id="tenUp"></span>, giving grand total of: £<span id="tenUpGrand" class="grand"></span></p>
@@ -67,36 +70,5 @@
 <script src="js/person.js"></script>
 <script src="js/controller.js"></script>
 <script>const controller = new Controller()</script>
-<script>
-  // const jane = new Person("Jane");
-  // const colin = new Person("Colin");
-  // const terry = new Person("Terry");
-  // const matt = new Person("Matt");
-  // const kirstie = new Person("Kirstie");
-  // const bill = new Bill(15950);
-  // const items = [];
-  // items[0] = new Item(1600, [{person: colin, proportion: 3}, {person: terry, proportion: 1}]);
-  // items[1] = new Item(600, [{person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
-  // items[2] = new Item(750, [{person: jane, proportion: 1}]);
-  // items[3] = new Item(750, [{person: kirstie, proportion: 1}]);
-  // items[4] = new Item(1500, [{person: jane, proportion: 1}, {person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
-  // items[5] = new Item(1100, [{person: colin, proportion: 1}, {person: terry, proportion: 1}]);
-  // items[6] = new Item(1900, [{person: jane, proportion: 1}, {person: terry, proportion: 1}]);
-  // items[7] = new Item(1700, [{person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
-  // items[8] = new Item(800, [{person: colin, proportion: 1}]);
-  // items[9] = new Item(1350, [{person: terry, proportion: 1}, {person: kirstie, proportion: 1}, {person: matt, proportion: 1}]);
-  // items[10] = new Item(1500, [{person: jane, proportion: 1}, {person: colin, proportion: 1}, {person: terry, proportion: 1}]);
-  // items[11] = new Item(600, [{person: kirstie, proportion: 1}]);
-  // items[12] = new Item(1800, [{person: kirstie, proportion: 1}, {person: matt, proportion: 2}]);
-  
-  // items.forEach(item => bill.addItem(item));
-  // bill.calculateSplit();
-  // bill.split.forEach((person) => {
-  //   const total = person.itemsPrices.reduce((acc, item) => {
-  //     return acc + item;
-  //   }, 0);
-  //   console.log(person.name, total);
-  // });
-</script>
 </body>
 </html>

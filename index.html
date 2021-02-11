@@ -31,14 +31,14 @@
   <article id="addBill">
     <p class="instruction">Add the bill total</p>
     <!-- <label for="billTotal" class="sr-text">Bill total amount</label> -->
-    <input type="text" id="billTotal" placeholder="Bill total amount">
+    <input type="number" id="billTotal" placeholder="Bill total amount">
     <button id="billSubmit">Save</button>
   </article>
 
   <article id="addItem">
     <h2 class="instruction">Add an item</h2>
     <!-- <label for="itemAmount" class="sr-text">Item amount</label> -->
-    <input type="text" id="itemAmount" placeholder="Item amount">
+    <input type="number" id="itemAmount" placeholder="Item amount">
     <div id="sharedBetween">
       <p><small>Select the people who shared this item.<br>And choose their portion</small></p>
       <p><small>[If shared equally leave portion set to 1]</small></p>
@@ -64,7 +64,7 @@
       <p><small>10% rounded up would be a tip of £<span  id="tenUp"></span>, giving grand total of: £<span id="tenUpGrand" class="grand"></span></small></p>
     </div>
     <!-- <label for="tipAmount" class="sr-text">Tip amount</label> -->
-    <input type="text" id="tipAmount" placeholder="Tip amount">
+    <input type="number" id="tipAmount" placeholder="Tip amount">
     <button id="tipSubmit">Add tip</button>
   </article>
 

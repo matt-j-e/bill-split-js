@@ -8,7 +8,6 @@ class Bill {
 
     addItem(item) {
         this.items.push(item);
-        // if (this.totalReached()) console.log("Total reached");
     }
 
     get currentTotal() {
@@ -19,9 +18,6 @@ class Bill {
     }
 
     get totalReached() {
-        // const currentTotal = this.items.reduce((acc, item) => {
-        //     return acc + item.amount;
-        // }, 0);
         return this.currentTotal === this.amount; // will return true if items add up to Bill amount
     }
 

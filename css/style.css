@@ -38,7 +38,6 @@ body {
 }
 
 h1 {
-    /* background-color: rgba(255,255,255,0.8); */
     background-color: rgba(var(--ltgrey),1);
     color: rgb(var(--orange));
     text-transform: uppercase;
@@ -47,7 +46,6 @@ h1 {
 }
 
 main {
-    /* background-color: rgba(0,0,0,0.8); */
     background-color: rgba(var(--dkblue), 0.85);
     min-height: 80vh;
     padding: 1rem;

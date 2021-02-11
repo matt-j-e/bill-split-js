@@ -2,7 +2,8 @@
 class Controller {
     constructor() {
         this.people = [];
-        this.renderNamesList();
+        // this.renderNamesList();
+        document.querySelector("#name").focus();
 
         document.querySelector("#nameSubmit").addEventListener("click", () => this.addName());
         document.querySelector("#splitBillButton").addEventListener("click", () => this.progressToBill());
@@ -18,6 +19,7 @@ class Controller {
         this.people.push(person);
         nameInput.value = "";
         this.renderNamesList();
+        nameInput.focus();
     }
 
     renderNamesList() {
@@ -47,7 +49,7 @@ class Controller {
 
     addBillAmount() {
         const billTotalInput = document.querySelector("#billTotal");
-        const billTotal = parseInt(billTotalInput.value);
+        const billTotal = parseFloat(billTotalInput.value) * 100;
         this.bill = new Bill(billTotal);
         document.querySelector("#totalAmountToSplit > span").innerText = this.bill.amount / 100;
         document.querySelector("#addBill").style.display = "none";
@@ -101,7 +103,7 @@ class Controller {
     addItem() {
         document.querySelector("#totalItemsSoFar").style.display = "block";
         const itemAmountInput = document.querySelector("#itemAmount");
-        const itemAmount = parseInt(itemAmountInput.value);
+        const itemAmount = parseFloat(itemAmountInput.value) * 100;
         const item = new Item(itemAmount, this.sharedBetweenArray);
         this.bill.addItem(item);
         this.updateTotalItemsSoFar();
@@ -169,10 +171,12 @@ class Controller {
             finalSplitElement.appendChild(li);
         });
         const totalLi = document.createElement("li");
+        totalLi.classList.add("finalTotal");
         totalLi.innerHTML = `Total: <b>£${billAmount / 100}</b>`;
         if (tipAmount > 0) {
             totalLi.innerHTML += ` plus £${tipAmount / 100} = £${(billAmount + tipAmount) / 100}`;
         }
+        finalSplitElement.appendChild(totalLi);
     }
 
     splitTotaliser(itemsPrices) {
@@ -202,7 +206,7 @@ class Controller {
     addTip() {
         const billAmount = parseInt(this.bill.amount);
         const tipAmountInput = document.querySelector("#tipAmount");
-        this.bill.tip = parseInt(tipAmountInput.value);
+        this.bill.tip = parseFloat(tipAmountInput.value) * 100;
         this.renderFinalSplit();
     }
 

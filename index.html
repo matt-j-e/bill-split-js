@@ -8,62 +8,66 @@
     <title>SplitIt</title>
 </head>
 <body>
-<h1>Split it</h1>
-<main id="container">
-  <section id="viewport">
-    <ul id="namesList">
-      <li>Add the names of the people in your party</li>
-    </ul>
-    <p id="totalAmountToSplit">Total amount to be split: £<span></span></p>
-    <p id="totalItemsSoFar">Total items added so far: £<span></span></p>
+<div id="container">
+<h1>Spl[it]</h1>
+<main>
 
-    <article id="addName">
-      <!-- <label for="name" class="sr-text">Add a name</label> -->
-      <input type="text" id="name" placeholder="Add name">
+  <p id="totalAmountToSplit">Total amount to be split: £<span></span></p>
+  <p id="totalItemsSoFar">Total items added so far: £<span></span></p>
+
+  <article id="addName">
+    <div>
+      <p class="instruction">Add the people in your party</p>
+      <input type="text" id="name" placeholder="name">
       <button id="nameSubmit">Add name</button>
-      <p>When you have added all the names you need click continue</p>
-    </article>
+      <ul id="namesList"></ul>
+    </div>
+    <div>
+      <p class="instruction">Got everybody?</p>
+      <button id="splitBillButton">Continue</button>
+    </div>
+  </article>
 
-    <button id="splitBillButton">Continue</button>
+  <article id="addBill">
+    <p class="instruction">Add the bill total</p>
+    <!-- <label for="billTotal" class="sr-text">Bill total amount</label> -->
+    <input type="text" id="billTotal" placeholder="Bill total amount">
+    <button id="billSubmit">Save</button>
+  </article>
 
-    <article id="addBill">
-      <h2>Add the bill total</h2>
-      <!-- <label for="billTotal" class="sr-text">Bill total amount</label> -->
-      <input type="text" id="billTotal" placeholder="Bill total amount">
-      <button id="billSubmit">Save bill amount</button>
-    </article>
+  <article id="addItem">
+    <h2 class="instruction">Add an item</h2>
+    <!-- <label for="itemAmount" class="sr-text">Item amount</label> -->
+    <input type="text" id="itemAmount" placeholder="Item amount">
+    <div id="sharedBetween">
+      <p><small>Select the people who shared this item.<br>And choose their portion</small></p>
+      <p><small>[If shared equally leave portion set to 1]</small></p>
+      <hr>
+    </div>
+    <button id="itemSubmit">Add item</button>
+  </article>
 
-    <article id="addItem">
-      <h2>Add an item</h2>
-      <label for="itemAmount" class="sr-text">Item amount</label>
-      <input type="text" id="itemAmount" placeholder="Item amount">
-      <div id="sharedBetween">
-        <p>Select the people who shared this item</p>
-        <p>And choose their portion</p>
-        <p><small>If shared equally leave portion set to 1</small></p>
-      </div>
-      <button id="itemSubmit">Add item</button>
-    </article>
+  <p id="allItemsAllocated">All of the bill items are allocated.</p>
 
-    <p id="allItemsAllocated">All of the bill items are allocated.</p>
+  <article id="finalSplit">
+    <p class="instruction">The bill splits as follows:</p>
+    <ul>  
+    </ul>
+  </article>
 
-    <article id="finalSplit">
-      <p>The bill splits as follows:</p>
-      <ul>  
-      </ul>
-    </article>
-
-    <article id="addTip">
-      <h2>Add a tip?</h2>
+  <article id="addTip">
+    <h2 class="instruction">Add a tip?</h2>
+    <div id="suggestions">
       <h3>Suggestions</h3>
-      <p>5% rounded up would be a tip of £<span id="fiveUp"></span>, giving grand total of: £<span id="fiveUpGrand" class="grand"></span></p>
-      <p>10% rounded up would be a tip of £<span  id="tenUp"></span>, giving grand total of: £<span id="tenUpGrand" class="grand"></span></p>
-      <label for="tipAmount" class="sr-text">Tip amount</label>
-      <input type="text" id="tipAmount" placeholder="Tip amount">
-      <button id="tipSubmit">Add tip</button>
-    </article>
+      <hr>
+      <p><small>5% rounded up would be a tip of £<span id="fiveUp"></span>, giving grand total of: £<span id="fiveUpGrand" class="grand"></span></small></p>
+      <p><small>10% rounded up would be a tip of £<span  id="tenUp"></span>, giving grand total of: £<span id="tenUpGrand" class="grand"></span></small></p>
+    </div>
+    <!-- <label for="tipAmount" class="sr-text">Tip amount</label> -->
+    <input type="text" id="tipAmount" placeholder="Tip amount">
+    <button id="tipSubmit">Add tip</button>
+  </article>
 
-  </section>
 </main>
 <script src="js/bill.js"></script>
 <script src="js/item.js"></script>

@@ -9,41 +9,134 @@
     display: none;
 }
 
+:root {
+    --dkblue: 41, 44, 63;
+    --dkred: 172, 24, 24;
+    --yellow: 237, 217, 58;
+    --orange: 163, 100, 14;
+    --ltgrey: 224, 225, 207;
+}
+
 body {
+    background: rgb(var(--dkblue));
+}
+
+::placeholder {
+    color: rgba(0,0,0,0.5);
+}
+
+#container {
     background: url('../bg.jpg') top center;
     background-size: cover;
-    min-height: 100vh;
-    max-width: 650px;
-    color: white;
-    padding: 2rem;
+    min-height: 94vh;
+    max-width: 540px;
+    color: rgb(var(--ltgrey));
+    padding: 3vh;
     text-align: center;
     font-family: Helvetica, Arial, sans-serif;
     margin: 0 auto;
 }
 
 h1 {
-    background-color: rgba(255,255,255,0.8);
-    color: #ac6c49;
+    /* background-color: rgba(255,255,255,0.8); */
+    background-color: rgba(var(--ltgrey),1);
+    color: rgb(var(--orange));
     text-transform: uppercase;
+    font-weight: 200;
+    margin-top: 0;
 }
 
 main {
-    background-color: rgba(0,0,0,0.7);
-    min-height: 60vh;
+    /* background-color: rgba(0,0,0,0.8); */
+    background-color: rgba(var(--dkblue), 0.85);
+    min-height: 80vh;
     padding: 1rem;
+}
+
+#addName {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #namesList {
     list-style-type: none;
     padding: 0;
     text-align: center;
+    font-size: 1.4rem;
+    line-height: 1.5;
 }
 
-input#name, input#billTotal, input#itemAmount {
+.instruction {
+    text-transform: uppercase;
+    color: rgb(var(--yellow));
+    font-size: smaller;
+}
+
+#name, #billTotal, #itemAmount, #tipAmount {
+    box-sizing: border-box;
     display: block;
     margin: 1rem auto;
-    
+    padding: 0.75rem;
+    width: 80%;
+    background-color: rgb(var(--ltgrey));
+    border: none;
 }
 
+#name:focus, #billTotal:focus, #itemAmount:focus, #tipAmount:focus {
+    outline: 3px solid rgba(var(--orange));
+}
+
+#nameSubmit,
+#splitBillButton,
+#billSubmit,
+#itemSubmit,
+#tipSubmit {
+    background-color: rgb(var(--dkblue));
+    color: rgb(var(--ltgrey));
+    padding: 0.5rem;
+    border: 1px outset rgba(var(--ltgrey), 0.5);
+    /* border: none; */
+    border-radius: 0.5rem;
+    width: 80%;
+    cursor: pointer;
+}
+
+#nameSubmit:focus,
+#splitBillButton:focus,
+#billSubmit:focus,
+#itemSubmit:focus,
+#tipSubmit:focus {
+    border-color: rgba(var(--ltgrey), 0.85);
+}
+
+#sharedBetween, #suggestions {
+    margin: 1rem;
+    padding: 1rem 0.5rem;
+    border: 1px solid rgba(var(--ltgrey), 0.5);
+}
+
+#sharedBetween input, #sharedBetween select {
+    margin: 0.5rem;
+    background-color: rgb(var(--ltgrey));
+    line-height: 1.5;
+}
+
+#finalSplit ul {
+    list-style-type: none;
+    padding: 1rem;
+    text-align: center;
+    /* font-size: 1.4rem; */
+    line-height: 2;
+    background-color: rgb(var(--dkblue));
+}
+
+.finalTotal {
+    font-weight: 700;
+    padding: 1rem 0;
+    border-top: 1px solid rgb(var(--ltgrey), 0.5);
+    border-bottom: 1px solid rgb(var(--ltgrey), 0.5);
+}
 
 /* <span>Photo by <a href="https://unsplash.com/@realbench?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Carlos Lindner</a> on <a href="https://unsplash.com/s/photos/restaurant-table?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span> */

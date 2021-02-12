@@ -51,7 +51,7 @@ class Controller {
         const billTotalInput = document.querySelector("#billTotal");
         const billTotal = parseFloat(billTotalInput.value) * 100;
         this.bill = new Bill(billTotal);
-        document.querySelector("#totalAmountToSplit > span").innerText = this.bill.amount / 100;
+        document.querySelector("#totalAmountToSplit > span").innerText = (this.bill.amount / 100).toFixed(2);
         document.querySelector("#addBill").style.display = "none";
         document.querySelector("#totalAmountToSplit").style.display = "block";
         this.renderItemSharingInputs();
@@ -136,7 +136,7 @@ class Controller {
 
     updateTotalItemsSoFar() {
         const itemsSoFarElement = document.querySelector("#totalItemsSoFar > span");
-        itemsSoFarElement.innerText = this.bill.currentTotal / 100;
+        itemsSoFarElement.innerText = (this.bill.currentTotal / 100).toFixed(2);
     }
 
     clearAddItemFields() {
@@ -164,17 +164,17 @@ class Controller {
                 tipShare = Math.round(this.bill.tip * (billShare / billAmount));
             }
             const totalShare = billShare + tipShare;
-            li.innerHTML = `${person.name}: <b>£${billShare / 100}</b>`;
+            li.innerHTML = `${person.name}: <b>£${(billShare / 100).toFixed(2)}</b>`;
             if (tipShare > 0) {
-                li.innerHTML += ` plus £${tipShare / 100} = £${totalShare / 100}`;
+                li.innerHTML += ` plus £${(tipShare / 100).toFixed(2)} = £${(totalShare / 100).toFixed(2)}`;
             }
             finalSplitElement.appendChild(li);
         });
         const totalLi = document.createElement("li");
         totalLi.classList.add("finalTotal");
-        totalLi.innerHTML = `Total: <b>£${billAmount / 100}</b>`;
+        totalLi.innerHTML = `Total: <b>£${(billAmount / 100).toFixed(2)}</b>`;
         if (tipAmount > 0) {
-            totalLi.innerHTML += ` plus £${tipAmount / 100} = £${(billAmount + tipAmount) / 100}`;
+            totalLi.innerHTML += ` plus £${(tipAmount / 100).toFixed(2)} = £${((billAmount + tipAmount) / 100).toFixed(2)}`;
         }
         finalSplitElement.appendChild(totalLi);
     }
@@ -197,10 +197,10 @@ class Controller {
         const tenUpGrandElement = document.querySelector("#tenUpGrand");
         const fiveUp = Math.ceil((billAmount * 1.05)/100)*100 - billAmount;
         const tenUp = Math.ceil((billAmount * 1.10)/100)*100 - billAmount;
-        fiveUpElement.innerText = fiveUp / 100;
-        tenUpElement.innerText = tenUp / 100;
-        fiveUpGrandElement.innerText = (billAmount + fiveUp) / 100;
-        tenUpGrandElement.innerText = (billAmount + tenUp) / 100;
+        fiveUpElement.innerText = (fiveUp / 100).toFixed(2);
+        tenUpElement.innerText = (tenUp / 100).toFixed(2);
+        fiveUpGrandElement.innerText = ((billAmount + fiveUp) / 100).toFixed(2);
+        tenUpGrandElement.innerText = ((billAmount + tenUp) / 100).toFixed(2);
     }
 
     addTip() {

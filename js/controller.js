@@ -10,6 +10,7 @@ class Controller {
         document.querySelector("#billSubmit").addEventListener("click", () => this.addBillAmount());
         document.querySelector("#itemSubmit").addEventListener("click", () => this.addItem());
         document.querySelector("#tipSubmit").addEventListener("click", () => this.addTip());
+        document.querySelector("#showDetailedSplit").addEventListener("click", () => this.showDetailedSplit());
 
         if ("serviceWorker" in navigator) {
             window.addEventListener("load", function() {
@@ -171,13 +172,18 @@ class Controller {
             const billShare = this.splitTotaliser(person.itemsPrices);
             const tipShare = Math.round(this.bill.tip * (billShare / billAmount));
             const totalShare = billShare + tipShare;
-            li.innerHTML = `<b>${person.name}</b>: £${(totalShare / 100).toFixed(2)}`;
+            li.innerHTML = `<span class="name">${person.name}</span><span>£${(totalShare / 100).toFixed(2)}</span>`;
             finalSplitElement.appendChild(li);
         });
         const totalLi = document.createElement("li");
         totalLi.classList.add("finalTotal");
-        totalLi.innerHTML = `Total: £${((billAmount + tipAmount) / 100).toFixed(2)}`;
+        totalLi.innerHTML = `<span>Total</span><span>£${((billAmount + tipAmount) / 100).toFixed(2)}</span>`;
         finalSplitElement.appendChild(totalLi);
+    }
+
+    showDetailedSplit() {
+        document.querySelector("#detailedSplit").style.display = "block";
+        document.querySelector("#showDetailedSplit").style.display = "none";
     }
 
     renderFinalSplitTable() {

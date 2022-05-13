@@ -7,7 +7,8 @@
 #addTip,
 #allItemsAllocated,
 #totalAmountToSplit,
-#finalSplit {
+#finalSplit,
+#detailedSplit {
     display: none;
 }
 
@@ -98,7 +99,8 @@ main {
 #splitBillButton,
 #billSubmit,
 #itemSubmit,
-#tipSubmit {
+#tipSubmit,
+#showDetailedSplit {
     background-color: rgb(var(--dkblue));
     color: rgb(var(--yellow));
     padding: 0.5rem;
@@ -113,7 +115,8 @@ main {
 #splitBillButton:focus,
 #billSubmit:focus,
 #itemSubmit:focus,
-#tipSubmit:focus {
+#tipSubmit:focus,
+#showDetailedSplit:focus {
     border-color: rgba(var(--ltgrey), 0.85);
 }
 
@@ -142,7 +145,22 @@ main {
     background-color: rgb(var(--dkblue));
 }
 
-.finalTotal {
+#finalSplit li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+}
+
+#finalSplit li:nth-child(even) {
+    background-color: rgba(var(--ltgrey), 0.1);
+}
+
+#finalSplit li.name {
+    font-weight: bold;
+}
+
+li.finalTotal {
     font-weight: bold;
     padding: 0.5rem 0;
     border-top: 1px solid rgb(var(--ltgrey), 0.5);
@@ -156,6 +174,11 @@ main {
     margin: 0 auto;
     padding: 1rem;
     overflow: hidden;
+    border-collapse: collapse;
+}
+
+#finalSplit table tr:nth-child(even) {
+    background-color: rgba(var(--ltgrey), 0.1);
 }
 
 .headers th {

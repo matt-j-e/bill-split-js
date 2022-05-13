@@ -204,4 +204,8 @@ li.finalTotal {
     border-bottom: 1px solid rgb(var(--ltgrey), 0.5);
 }
 
+#detailedSplit {
+    margin-top: 2rem;
+}
+
 /* <span>Photo by <a href="https://unsplash.com/@realbench?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Carlos Lindner</a> on <a href="https://unsplash.com/s/photos/restaurant-table?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span> */

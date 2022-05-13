@@ -242,7 +242,6 @@ class Controller {
         const itemSubtotal = document.createElement("th");
         itemSubtotal.classList.add("left");
         itemSubtotal.setAttribute("scope", "row");
-        // itemSubtotal.innerHTML = "Tot";
         subtotalRow.appendChild(itemSubtotal);
         this.bill.split.forEach((person) => {
             let nameTotal = document.createElement("td");
@@ -268,12 +267,12 @@ class Controller {
             const tipShare = (tipAmount / billAmount) * billShare;
             const tipShareCell = document.createElement("td");
             tipShareCell.classList.add("right");
-            tipShareCell.innerHTML = (tipShare / 100).toFixed(2);
+            tipShareCell.innerHTML = tipShare > 0 ? (tipShare / 100).toFixed(2) : "-";
             tipsRow.appendChild(tipShareCell);
         });
         const tipsTotalCell = document.createElement("td");
         tipsTotalCell.classList.add("right");
-        tipsTotalCell.innerHTML = (tipAmount / 100).toFixed(2);
+        tipsTotalCell.innerHTML = tipAmount > 0 ? (tipAmount / 100).toFixed(2) : "-";
         tipsRow.appendChild(tipsTotalCell);
         table.appendChild(tipsRow);
         // TOTAL ROW
@@ -282,7 +281,6 @@ class Controller {
         const itemTotal = document.createElement("th");
         itemTotal.classList.add("left");
         itemTotal.setAttribute("scope", "row");
-        // itemTotal.innerHTML = "Total";
         totalRow.appendChild(itemTotal);
         this.bill.split.forEach(person => {
             const billShare = this.splitTotaliser(person.itemsPrices);

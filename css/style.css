@@ -177,7 +177,7 @@ li.finalTotal {
     border-collapse: collapse;
 }
 
-#finalSplit table tr:nth-child(odd) {
+#finalSplit table tr:nth-child(even) {
     background-color: rgba(var(--ltgrey), 0.1);
 }
 

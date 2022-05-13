@@ -200,15 +200,19 @@ class Controller {
         const rows = this.bill.split[0].itemsPrices.length;
         // HEADER ROW
         const headerRow = document.createElement("tr");
+        headerRow.classList.add("headers");
         const itemsHeader = document.createElement("th");
+        itemsHeader.classList.add("left");
         itemsHeader.innerHTML = "Item";
         headerRow.appendChild(itemsHeader);
         this.bill.split.forEach((person) => {
             let nameHeader = document.createElement("th");
+            nameHeader.classList.add("right");
             nameHeader.innerHTML = person.name;
             headerRow.appendChild(nameHeader);
         });
         const itemsTotalHeader = document.createElement("th");
+        itemsTotalHeader.classList.add("right");
         itemsTotalHeader.innerHTML = "Total";
         headerRow.appendChild(itemsTotalHeader);
         table.appendChild(headerRow);
@@ -217,40 +221,48 @@ class Controller {
             let tableRow = document.createElement("tr");
             let itemCell = document.createElement("th");
             itemCell.setAttribute("scope", "row");
+            itemCell.classList.add("left");
             itemCell.innerHTML = r + 1;
             tableRow.appendChild(itemCell);
             let itemTotal = 0;
             for (let c = 0; c < columns; c++) {
                 let dataCell = document.createElement("td");
+                dataCell.classList.add("right");
                 const shareOfItem = this.bill.split[c].itemsPrices[r];
                 dataCell.innerHTML = (shareOfItem / 100).toFixed(2);
                 itemTotal += shareOfItem;
                 tableRow.appendChild(dataCell);
             }
             let itemTotalCell = document.createElement("td");
+            itemTotalCell.classList.add("right");
             itemTotalCell.innerHTML = (itemTotal / 100).toFixed(2);
             tableRow.appendChild(itemTotalCell);
             table.appendChild(tableRow);
         }
         // SUB-TOTAL ROW
         const subtotalRow = document.createElement("tr");
+        subtotalRow.classList.add("sub-total");
         const itemSubtotal = document.createElement("th");
+        itemSubtotal.classList.add("left");
         itemSubtotal.setAttribute("scope", "row");
-        itemSubtotal.innerHTML = "Tot";
+        // itemSubtotal.innerHTML = "Tot";
         subtotalRow.appendChild(itemSubtotal);
         this.bill.split.forEach((person) => {
             let nameTotal = document.createElement("td");
+            nameTotal.classList.add("right");
             const billShare = this.splitTotaliser(person.itemsPrices);
             nameTotal.innerHTML = (billShare / 100).toFixed(2);
             subtotalRow.appendChild(nameTotal);
         });
         const subtotalTotalCell = document.createElement("td");
+        subtotalTotalCell.classList.add("right");
         subtotalTotalCell.innerHTML = (billAmount / 100).toFixed(2);
         subtotalRow.appendChild(subtotalTotalCell);
         table.appendChild(subtotalRow);
         // TIPS ROW
         const tipsRow = document.createElement("tr");
         const tipsHeader = document.createElement("th");
+        tipsHeader.classList.add("left");
         tipsHeader.setAttribute("scope", "row");
         tipsHeader.innerHTML = "Tip";
         tipsRow.appendChild(tipsHeader);
@@ -258,28 +270,34 @@ class Controller {
             const billShare = this.splitTotaliser(person.itemsPrices);
             const tipShare = (tipAmount / billAmount) * billShare;
             const tipShareCell = document.createElement("td");
+            tipShareCell.classList.add("right");
             tipShareCell.innerHTML = (tipShare / 100).toFixed(2);
             tipsRow.appendChild(tipShareCell);
         });
         const tipsTotalCell = document.createElement("td");
+        tipsTotalCell.classList.add("right");
         tipsTotalCell.innerHTML = (tipAmount / 100).toFixed(2);
         tipsRow.appendChild(tipsTotalCell);
         table.appendChild(tipsRow);
         // TOTAL ROW
         const totalRow = document.createElement("tr");
+        totalRow.classList.add("total");
         const itemTotal = document.createElement("th");
+        itemTotal.classList.add("left");
         itemTotal.setAttribute("scope", "row");
-        itemTotal.innerHTML = "Tot";
+        // itemTotal.innerHTML = "Total";
         totalRow.appendChild(itemTotal);
         this.bill.split.forEach(person => {
             const billShare = this.splitTotaliser(person.itemsPrices);
             const tipShare = (tipAmount / billAmount) * billShare;
             const totalShare = billShare + tipShare;
             const totalShareCell = document.createElement("td");
+            totalShareCell.classList.add("right");
             totalShareCell.innerHTML = (totalShare / 100).toFixed(2);
             totalRow.appendChild(totalShareCell);
         });
         const totalTotalCell = document.createElement("td");
+        totalTotalCell.classList.add("right");
         totalTotalCell.innerHTML = ((billAmount + tipAmount) / 100).toFixed(2)
         totalRow.appendChild(totalTotalCell);
         table.appendChild(totalRow);

@@ -30,10 +30,10 @@ body {
 #container {
     background: url('../bg.jpg') top center;
     background-size: cover;
-    min-height: 94vh;
+    min-height: 96vh;
     max-width: 540px;
     color: rgb(var(--ltgrey));
-    padding: 3vh;
+    padding: 2vh;
     text-align: center;
     font-family: Helvetica, Arial, sans-serif;
     margin: 0 auto;
@@ -75,7 +75,8 @@ main {
 
 .instruction {
     text-transform: uppercase;
-    color: rgb(var(--yellow));
+    /* color: rgb(var(--yellow)); */
+    font-weight: bold;
     font-size: smaller;
 }
 
@@ -99,7 +100,7 @@ main {
 #itemSubmit,
 #tipSubmit {
     background-color: rgb(var(--dkblue));
-    color: rgb(var(--ltgrey));
+    color: rgb(var(--yellow));
     padding: 0.5rem;
     border: 1px outset rgba(var(--ltgrey), 0.5);
     /* border: none; */
@@ -128,13 +129,49 @@ main {
     line-height: 1.5;
 }
 
+#finalSplit {
+    overflow: scroll;
+}
+
 #finalSplit ul {
+    font-size: 90%;
+    line-height: 2;
     list-style-type: none;
     padding: 1rem;
     text-align: center;
-    /* font-size: 1.4rem; */
-    line-height: 2;
     background-color: rgb(var(--dkblue));
+}
+
+#finalSplit table {
+    background-color: rgb(var(--dkblue));
+    font-size: 90%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.headers th {
+    color: rgb(var(--orange));
+    border-bottom: 1px solid rgb(var(--orange), 0.5);
+}
+
+.left {
+    text-align: left;;
+}
+
+.right {
+    text-align: right;
+}
+
+.sub-total td, .total td {
+    padding: 0.5rem 0;
+    border-top: 1px solid rgb(var(--ltgrey), 0.5);
+}
+
+.total td {
+    font-weight: bold;
+    border-bottom: 1px solid rgb(var(--ltgrey), 0.5);
 }
 
 .finalTotal {

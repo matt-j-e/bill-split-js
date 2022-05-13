@@ -325,7 +325,8 @@ class Controller {
     addTip() {
         const billAmount = parseInt(this.bill.amount);
         const tipAmountInput = document.querySelector("#tipAmount");
-        this.bill.tip = parseFloat(tipAmountInput.value) * 100;
+        const tipValue = tipAmountInput.value || 0;
+        this.bill.tip = parseFloat(tipValue) * 100;
         this.renderFinalSplit();
         this.renderFinalSplitTable();
     }

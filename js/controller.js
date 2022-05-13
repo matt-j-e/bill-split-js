@@ -169,23 +169,14 @@ class Controller {
         this.bill.split.forEach((person) => {
             const li = document.createElement("li");
             const billShare = this.splitTotaliser(person.itemsPrices);
-            let tipShare = 0;
-            if (tipAmount > 0) {
-                tipShare = Math.round(this.bill.tip * (billShare / billAmount));
-            }
+            const tipShare = Math.round(this.bill.tip * (billShare / billAmount));
             const totalShare = billShare + tipShare;
-            li.innerHTML = `${person.name}: <b>£${(billShare / 100).toFixed(2)}</b>`;
-            if (tipShare > 0) {
-                li.innerHTML += ` plus £${(tipShare / 100).toFixed(2)} = £${(totalShare / 100).toFixed(2)}`;
-            }
+            li.innerHTML = `<b>${person.name}</b>: £${(totalShare / 100).toFixed(2)}`;
             finalSplitElement.appendChild(li);
         });
         const totalLi = document.createElement("li");
         totalLi.classList.add("finalTotal");
-        totalLi.innerHTML = `Total: <b>£${(billAmount / 100).toFixed(2)}</b>`;
-        if (tipAmount > 0) {
-            totalLi.innerHTML += ` plus £${(tipAmount / 100).toFixed(2)} = £${((billAmount + tipAmount) / 100).toFixed(2)}`;
-        }
+        totalLi.innerHTML = `Total: £${((billAmount + tipAmount) / 100).toFixed(2)}`;
         finalSplitElement.appendChild(totalLi);
     }
 
@@ -229,7 +220,7 @@ class Controller {
                 let dataCell = document.createElement("td");
                 dataCell.classList.add("right");
                 const shareOfItem = this.bill.split[c].itemsPrices[r];
-                dataCell.innerHTML = (shareOfItem / 100).toFixed(2);
+                dataCell.innerHTML = shareOfItem > 0 ? (shareOfItem / 100).toFixed(2) : "-";
                 itemTotal += shareOfItem;
                 tableRow.appendChild(dataCell);
             }

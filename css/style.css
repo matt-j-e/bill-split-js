@@ -142,6 +142,13 @@ main {
     background-color: rgb(var(--dkblue));
 }
 
+.finalTotal {
+    font-weight: bold;
+    padding: 0.5rem 0;
+    border-top: 1px solid rgb(var(--ltgrey), 0.5);
+    border-bottom: 1px solid rgb(var(--ltgrey), 0.5);
+}
+
 #finalSplit table {
     background-color: rgb(var(--dkblue));
     font-size: 90%;
@@ -171,13 +178,6 @@ main {
 
 .total td {
     font-weight: bold;
-    border-bottom: 1px solid rgb(var(--ltgrey), 0.5);
-}
-
-.finalTotal {
-    font-weight: 700;
-    padding: 1rem 0;
-    border-top: 1px solid rgb(var(--ltgrey), 0.5);
     border-bottom: 1px solid rgb(var(--ltgrey), 0.5);
 }
 

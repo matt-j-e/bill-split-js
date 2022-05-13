@@ -51,9 +51,13 @@
   <p id="allItemsAllocated">All of the bill items are allocated.</p>
 
   <article id="finalSplit">
-    <p class="instruction">The bill splits as follows:</p>
-    <ul>  
-    </ul>
+    <p class="instruction">Total amount divides as follows:</p>
+    <ul></ul>
+    <button id="showDetailedSplit">Show detailed breakdown...</button>
+    <div id="detailedSplit">
+      <p class="instruction">Detailed bill breakdown:</p>
+      <table></table>
+    </div>
   </article>
 
   <article id="addTip">
@@ -65,7 +69,7 @@
       <p><small>10% rounded up would be a tip of £<span  id="tenUp"></span>, giving grand total of: £<span id="tenUpGrand" class="grand"></span></small></p>
     </div>
     <!-- <label for="tipAmount" class="sr-text">Tip amount</label> -->
-    <input type="number" id="tipAmount" placeholder="Tip amount">
+    <input type="number" id="tipAmount" placeholder="Tip amount" value="0">
     <button id="tipSubmit">Add tip</button>
   </article>
 

@@ -7,7 +7,8 @@
 #addTip,
 #allItemsAllocated,
 #totalAmountToSplit,
-#finalSplit {
+#finalSplit,
+#detailedSplit {
     display: none;
 }
 
@@ -30,10 +31,10 @@ body {
 #container {
     background: url('../bg.jpg') top center;
     background-size: cover;
-    min-height: 94vh;
+    min-height: 96vh;
     max-width: 540px;
     color: rgb(var(--ltgrey));
-    padding: 3vh;
+    padding: 2vh;
     text-align: center;
     font-family: Helvetica, Arial, sans-serif;
     margin: 0 auto;
@@ -75,7 +76,8 @@ main {
 
 .instruction {
     text-transform: uppercase;
-    color: rgb(var(--yellow));
+    /* color: rgb(var(--yellow)); */
+    font-weight: bold;
     font-size: smaller;
 }
 
@@ -97,9 +99,10 @@ main {
 #splitBillButton,
 #billSubmit,
 #itemSubmit,
-#tipSubmit {
+#tipSubmit,
+#showDetailedSplit {
     background-color: rgb(var(--dkblue));
-    color: rgb(var(--ltgrey));
+    color: rgb(var(--yellow));
     padding: 0.5rem;
     border: 1px outset rgba(var(--ltgrey), 0.5);
     /* border: none; */
@@ -112,7 +115,8 @@ main {
 #splitBillButton:focus,
 #billSubmit:focus,
 #itemSubmit:focus,
-#tipSubmit:focus {
+#tipSubmit:focus,
+#showDetailedSplit:focus {
     border-color: rgba(var(--ltgrey), 0.85);
 }
 
@@ -128,20 +132,80 @@ main {
     line-height: 1.5;
 }
 
+#finalSplit {
+    overflow: scroll;
+}
+
 #finalSplit ul {
+    font-size: 90%;
+    line-height: 2;
     list-style-type: none;
     padding: 1rem;
     text-align: center;
-    /* font-size: 1.4rem; */
-    line-height: 2;
     background-color: rgb(var(--dkblue));
 }
 
-.finalTotal {
-    font-weight: 700;
-    padding: 1rem 0;
+#finalSplit li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+}
+
+#finalSplit li:nth-child(odd) {
+    background-color: rgba(var(--ltgrey), 0.1);
+}
+
+#finalSplit li.name {
+    font-weight: bold;
+}
+
+li.finalTotal {
+    font-weight: bold;
+    padding: 0.5rem 0;
     border-top: 1px solid rgb(var(--ltgrey), 0.5);
     border-bottom: 1px solid rgb(var(--ltgrey), 0.5);
+}
+
+#finalSplit table {
+    background-color: rgb(var(--dkblue));
+    font-size: 90%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
+#finalSplit table tr:nth-child(even) {
+    background-color: rgba(var(--ltgrey), 0.1);
+}
+
+.headers th {
+    color: rgb(var(--orange));
+    border-bottom: 1px solid rgb(var(--orange), 0.5);
+}
+
+.left {
+    text-align: left;;
+}
+
+.right {
+    text-align: right;
+}
+
+.sub-total td, .total td {
+    padding: 0.5rem 0;
+    border-top: 1px solid rgb(var(--ltgrey), 0.5);
+}
+
+.total td {
+    font-weight: bold;
+    border-bottom: 1px solid rgb(var(--ltgrey), 0.5);
+}
+
+#detailedSplit {
+    margin-top: 2rem;
 }
 
 /* <span>Photo by <a href="https://unsplash.com/@realbench?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Carlos Lindner</a> on <a href="https://unsplash.com/s/photos/restaurant-table?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span> */

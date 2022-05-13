@@ -10,6 +10,7 @@ class Controller {
         document.querySelector("#billSubmit").addEventListener("click", () => this.addBillAmount());
         document.querySelector("#itemSubmit").addEventListener("click", () => this.addItem());
         document.querySelector("#tipSubmit").addEventListener("click", () => this.addTip());
+        document.querySelector("#showDetailedSplit").addEventListener("click", () => this.showDetailedSplit());
 
         if ("serviceWorker" in navigator) {
             window.addEventListener("load", function() {
@@ -169,24 +170,132 @@ class Controller {
         this.bill.split.forEach((person) => {
             const li = document.createElement("li");
             const billShare = this.splitTotaliser(person.itemsPrices);
-            let tipShare = 0;
-            if (tipAmount > 0) {
-                tipShare = Math.round(this.bill.tip * (billShare / billAmount));
-            }
+            const tipShare = Math.round(this.bill.tip * (billShare / billAmount));
             const totalShare = billShare + tipShare;
-            li.innerHTML = `${person.name}: <b>£${(billShare / 100).toFixed(2)}</b>`;
-            if (tipShare > 0) {
-                li.innerHTML += ` plus £${(tipShare / 100).toFixed(2)} = £${(totalShare / 100).toFixed(2)}`;
-            }
+            li.innerHTML = `<span class="name">${person.name}</span><span>£${(totalShare / 100).toFixed(2)}</span>`;
             finalSplitElement.appendChild(li);
         });
         const totalLi = document.createElement("li");
         totalLi.classList.add("finalTotal");
-        totalLi.innerHTML = `Total: <b>£${(billAmount / 100).toFixed(2)}</b>`;
-        if (tipAmount > 0) {
-            totalLi.innerHTML += ` plus £${(tipAmount / 100).toFixed(2)} = £${((billAmount + tipAmount) / 100).toFixed(2)}`;
-        }
+        totalLi.innerHTML = `<span>Total</span><span>£${((billAmount + tipAmount) / 100).toFixed(2)}</span>`;
         finalSplitElement.appendChild(totalLi);
+    }
+
+    showDetailedSplit() {
+        document.querySelector("#detailedSplit").style.display = "block";
+        document.querySelector("#showDetailedSplit").style.display = "none";
+    }
+
+    renderFinalSplitTable() {
+        document.querySelector("#allItemsAllocated").style.display = "none";
+        document.querySelector("#finalSplit").style.display = "block";
+        document.querySelector("#addTip").style.display = "none";
+        const billAmount = parseInt(this.bill.amount);
+        const tipAmount = this.bill.tip;
+        const table = document.querySelector("#finalSplit table");
+        const columns = this.bill.split.length;
+        const rows = this.bill.split[0].itemsPrices.length;
+        // HEADER ROW
+        const headerRow = document.createElement("tr");
+        headerRow.classList.add("headers");
+        const itemsHeader = document.createElement("th");
+        itemsHeader.classList.add("left");
+        itemsHeader.innerHTML = "Item";
+        headerRow.appendChild(itemsHeader);
+        this.bill.split.forEach((person) => {
+            let nameHeader = document.createElement("th");
+            nameHeader.classList.add("right");
+            nameHeader.innerHTML = person.name;
+            headerRow.appendChild(nameHeader);
+        });
+        const itemsTotalHeader = document.createElement("th");
+        itemsTotalHeader.classList.add("right");
+        itemsTotalHeader.innerHTML = "Total";
+        headerRow.appendChild(itemsTotalHeader);
+        table.appendChild(headerRow);
+        // DATA ROWS
+        for (let r = 0; r < rows; r++) {
+            let tableRow = document.createElement("tr");
+            let itemCell = document.createElement("th");
+            itemCell.setAttribute("scope", "row");
+            itemCell.classList.add("left");
+            itemCell.innerHTML = r + 1;
+            tableRow.appendChild(itemCell);
+            let itemTotal = 0;
+            for (let c = 0; c < columns; c++) {
+                let dataCell = document.createElement("td");
+                dataCell.classList.add("right");
+                const shareOfItem = this.bill.split[c].itemsPrices[r];
+                dataCell.innerHTML = shareOfItem > 0 ? (shareOfItem / 100).toFixed(2) : "-";
+                itemTotal += shareOfItem;
+                tableRow.appendChild(dataCell);
+            }
+            let itemTotalCell = document.createElement("td");
+            itemTotalCell.classList.add("right");
+            itemTotalCell.innerHTML = (itemTotal / 100).toFixed(2);
+            tableRow.appendChild(itemTotalCell);
+            table.appendChild(tableRow);
+        }
+        // SUB-TOTAL ROW
+        const subtotalRow = document.createElement("tr");
+        subtotalRow.classList.add("sub-total");
+        const itemSubtotal = document.createElement("th");
+        itemSubtotal.classList.add("left");
+        itemSubtotal.setAttribute("scope", "row");
+        subtotalRow.appendChild(itemSubtotal);
+        this.bill.split.forEach((person) => {
+            let nameTotal = document.createElement("td");
+            nameTotal.classList.add("right");
+            const billShare = this.splitTotaliser(person.itemsPrices);
+            nameTotal.innerHTML = (billShare / 100).toFixed(2);
+            subtotalRow.appendChild(nameTotal);
+        });
+        const subtotalTotalCell = document.createElement("td");
+        subtotalTotalCell.classList.add("right");
+        subtotalTotalCell.innerHTML = (billAmount / 100).toFixed(2);
+        subtotalRow.appendChild(subtotalTotalCell);
+        table.appendChild(subtotalRow);
+        // TIPS ROW
+        const tipsRow = document.createElement("tr");
+        const tipsHeader = document.createElement("th");
+        tipsHeader.classList.add("left");
+        tipsHeader.setAttribute("scope", "row");
+        tipsHeader.innerHTML = "Tip";
+        tipsRow.appendChild(tipsHeader);
+        this.bill.split.forEach(person => {
+            const billShare = this.splitTotaliser(person.itemsPrices);
+            const tipShare = (tipAmount / billAmount) * billShare;
+            const tipShareCell = document.createElement("td");
+            tipShareCell.classList.add("right");
+            tipShareCell.innerHTML = tipShare > 0 ? (tipShare / 100).toFixed(2) : "-";
+            tipsRow.appendChild(tipShareCell);
+        });
+        const tipsTotalCell = document.createElement("td");
+        tipsTotalCell.classList.add("right");
+        tipsTotalCell.innerHTML = tipAmount > 0 ? (tipAmount / 100).toFixed(2) : "-";
+        tipsRow.appendChild(tipsTotalCell);
+        table.appendChild(tipsRow);
+        // TOTAL ROW
+        const totalRow = document.createElement("tr");
+        totalRow.classList.add("total");
+        const itemTotal = document.createElement("th");
+        itemTotal.classList.add("left");
+        itemTotal.setAttribute("scope", "row");
+        totalRow.appendChild(itemTotal);
+        this.bill.split.forEach(person => {
+            const billShare = this.splitTotaliser(person.itemsPrices);
+            const tipShare = (tipAmount / billAmount) * billShare;
+            const totalShare = billShare + tipShare;
+            const totalShareCell = document.createElement("td");
+            totalShareCell.classList.add("right");
+            totalShareCell.innerHTML = (totalShare / 100).toFixed(2);
+            totalRow.appendChild(totalShareCell);
+        });
+        const totalTotalCell = document.createElement("td");
+        totalTotalCell.classList.add("right");
+        totalTotalCell.innerHTML = ((billAmount + tipAmount) / 100).toFixed(2)
+        totalRow.appendChild(totalTotalCell);
+        table.appendChild(totalRow);
     }
 
     splitTotaliser(itemsPrices) {
@@ -216,8 +325,10 @@ class Controller {
     addTip() {
         const billAmount = parseInt(this.bill.amount);
         const tipAmountInput = document.querySelector("#tipAmount");
-        this.bill.tip = parseFloat(tipAmountInput.value) * 100;
+        const tipValue = tipAmountInput.value || 0;
+        this.bill.tip = parseFloat(tipValue) * 100;
         this.renderFinalSplit();
+        this.renderFinalSplitTable();
     }
 
 }

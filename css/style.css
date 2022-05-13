@@ -152,7 +152,7 @@ main {
     padding: 0 0.5rem;
 }
 
-#finalSplit li:nth-child(even) {
+#finalSplit li:nth-child(odd) {
     background-color: rgba(var(--ltgrey), 0.1);
 }
 
@@ -177,7 +177,7 @@ li.finalTotal {
     border-collapse: collapse;
 }
 
-#finalSplit table tr:nth-child(even) {
+#finalSplit table tr:nth-child(odd) {
     background-color: rgba(var(--ltgrey), 0.1);
 }
 
